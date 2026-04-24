@@ -84,7 +84,7 @@ clothes.forEach((item) => {
                 <p class="name">${item.name}</p>
                 <div class="wrapper">
                     <span class="price">$${item.price}</span>
-                    <button class="add_btn">add to cart</button>
+                    <button class="add_btn" name='${item.id}'>add to cart</button>
                 </div>
             </div>`
 });
@@ -100,6 +100,7 @@ cartButton.addEventListener('click', () =>{
 productsHtml.addEventListener('click', (e) =>{
    
    if(e.target.getAttribute('class') === 'add_btn'){
-    console.log('buttonzea dakikebuli')
+    const ID = e.target.getAttribute('name') 
+    console.log(ID)
    }
 })
