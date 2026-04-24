@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.products {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 90px;
+  position: relative;
+
+  .cart_logo {
+    cursor: pointer;
+  }
+  div.cart {
+    width: 396px;
+    height: 497px;
+    background-color: white;
+    position: absolute;
+    top: 70px;
+    right: 25px;
+  }
+}
+
+
+.hidden{
+    display: none;
+}
