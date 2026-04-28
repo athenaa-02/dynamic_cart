@@ -30,7 +30,17 @@ header {
   }
 }
 
+.hidden {
+  display: none;
+}
 
-.hidden{
-    display: none;
+.cart_product {
+  width: 330px;
+  height: 99px;
+  display: flex;
+  gap: 14px;
+
+  img.product_image {
+    height: 100%;
+  }
 }
