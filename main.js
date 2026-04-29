@@ -101,22 +101,26 @@ productsHtml.addEventListener("click", (event) => {
     const ID = event.target.getAttribute("name");
 
     const chosen = clothes.find((item) => Number(ID) === item.id);
+    const existingElement = 
+
+
+    // if(){
+
+    // }
     
-    cartArray.push(chosen)
-   
-    render()
+    console.log(cartArray)
+
+    render();
   }
 });
 
+function render() {
+  cartElement.innerHTML = "";
+  cartArray.forEach((product) => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "cart_product");
 
-
-function render(){
-  cartElement.innerHTML = ''
-cartArray.forEach((product) =>{
-  const div = document.createElement('div')
-  div.setAttribute('class', 'cart_product')
-  
-  div.innerHTML = ` <img class="product_image" src="${product.image}"  alt="" />
+    div.innerHTML = ` <img class="product_image" src="${product.image}"  alt="" />
         <div class="text">
           <div class="name_delete">
             <h3>${product.name}</h3>
@@ -134,10 +138,17 @@ cartArray.forEach((product) =>{
           </div>
           <div class="price_quantity">
            <span class="product_price">$${product.price}</span>
-           <img src="./images/Frame 17.png" alt="">
+           <div class="quantity">
+  <button class="decrease">-</button>
+  <span>${product.quantity}</span>
+  <button class="increase">+</button>
+</div>
           </div>
-        </div>`
+        </div>`;
 
-        cartElement.append(div)
-})
+    cartElement.append(div);
+  });
 }
+
+
+
