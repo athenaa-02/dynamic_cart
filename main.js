@@ -98,17 +98,19 @@ productsHtml.addEventListener("click", (event) => {
   const clickedClass = event.target.getAttribute("class");
 
   if (clickedClass === "add_btn") {
-    const ID = event.target.getAttribute("name");
+    const ID = Number(event.target.getAttribute("name"));
 
-    const chosen = clothes.find((item) => Number(ID) === item.id);
-    const existingElement = 
+    const chosen = clothes.find((item) => ID === item.id);
+    const existingElement = cartArray.find((product) => product.id === ID)
 
 
-    // if(){
-
-    // }
+    if(existingElement){
+      existingElement.quantity += 1
+    }else{
+      cartArray.push({...chosen, quantity: 1})
+    }
     
-    console.log(cartArray)
+    // console.log(cartArray)
 
     render();
   }
@@ -139,9 +141,9 @@ function render() {
           <div class="price_quantity">
            <span class="product_price">$${product.price}</span>
            <div class="quantity">
-  <button class="decrease">-</button>
+  <button class="decrease" name='${product.id}'>-</button>
   <span>${product.quantity}</span>
-  <button class="increase">+</button>
+  <button class="increase" name='${product.id}'>+</button>
 </div>
           </div>
         </div>`;
@@ -151,4 +153,38 @@ function render() {
 }
 
 
+cartElement.addEventListener('click', (e) =>{
+  const clickedElement = e.target
+  const ID = Number(clickedElement.getAttribute('name'))
+  
+  const chosenItem = cartArray.find((p) => p.id === ID)
+// console.log(chosenItem)
 
+  if(chosenItem){
+   
+    if(clickedElement.classList.contains('increase')){
+     chosenItem.quantity+=1
+     render()
+    }
+    if(clickedElement.classList.contains('decrease')){
+      chosenItem.quantity -= 1
+      render()
+    }
+  }
+})
+
+
+
+
+
+// const fruits = ['apple', 'banana', 'orange']
+
+// const fruitsArray = [...fruits, 'pineapple']
+// console.log(fruitsArray)
+
+// const obj = {
+//   name: 'car',
+//   year: 1990,
+// } 
+// const newObj = {...obj, model: 'sedan'}
+// console.log(newObj)

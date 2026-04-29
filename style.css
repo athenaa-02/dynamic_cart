@@ -20,7 +20,7 @@ header {
   .cart_logo {
     cursor: pointer;
   }
-  div.cart {
+  .cart {
     width: 396px;
     height: 497px;
     background-color: white;
@@ -36,7 +36,7 @@ header {
 }
 
 .hidden {
-  display: none;
+  display: none !important
 }
 
 .cart_product {
