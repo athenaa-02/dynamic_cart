@@ -194,3 +194,13 @@ cartElement.addEventListener("click", (e) => {
 // const newArr = Arr.filter((item) => item < 50)
 // console.log(newArr)
 // console.log(Arr)
+
+const header = document.querySelector('header')
+
+window.addEventListener('scroll', () =>{
+  if(window.scrollY > 250){
+header.classList.add('fix')
+  }else{
+    header.classList.remove('fix')
+  }
+})

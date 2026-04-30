@@ -10,12 +10,25 @@
   flex-wrap: wrap;
 }
 
+.fix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  animation: scroll 1s;
+}
+.wrapper {
+  height: 90px;
+}
+
 header {
   display: flex;
+  width: 100%;
   justify-content: space-around;
   align-items: center;
   height: 90px;
   position: relative;
+  background-color: beige;
+  
 
   .cart_logo {
     cursor: pointer;
@@ -36,7 +49,7 @@ header {
 }
 
 .hidden {
-  display: none !important
+  display: none !important;
 }
 
 .cart_product {
@@ -70,17 +83,27 @@ header {
   margin-top: 21px;
 }
 
-.quantity{
+.quantity {
   width: 105px;
   height: 31px;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   border-radius: 62px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 
-  button{
+  button {
     border: none;
     font-size: 25px;
+  }
+}
+
+
+@keyframes scroll {
+  0%{
+    transform: translateY(-100px);
+  }
+  100%{
+    transform: translateY(0px);
   }
 }
