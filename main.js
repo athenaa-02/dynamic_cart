@@ -74,9 +74,8 @@ const clothes = [
 ];
 
 const productsHtml = document.querySelector(".products");
-const cartButton = document.querySelector('.cart_logo')
-const cartElement = document.querySelector('.cart')
-
+const cartButton = document.querySelector(".cart_logo");
+const cartElement = document.querySelector(".cart");
 
 clothes.forEach((item) => {
   productsHtml.innerHTML += `<div class="card">
@@ -86,21 +85,106 @@ clothes.forEach((item) => {
                     <span class="price">$${item.price}</span>
                     <button class="add_btn" name='${item.id}'>add to cart</button>
                 </div>
-            </div>`
+            </div>`;
 });
 
+cartButton.addEventListener("click", () => {
+  cartElement.classList.toggle("hidden");
+});
 
-cartButton.addEventListener('click', () =>{
-    cartElement.classList.toggle('hidden')
+let cartArray = [];
 
-})
+productsHtml.addEventListener("click", (event) => {
+  const clickedClass = event.target.getAttribute("class");
+
+  if (clickedClass === "add_btn") {
+    const ID = Number(event.target.getAttribute("name"));
+
+    const chosen = clothes.find((item) => ID === item.id);
+    const existingElement = cartArray.find((product) => product.id === ID)
 
 
+    if(existingElement){
+      existingElement.quantity += 1
+    }else{
+      cartArray.push({...chosen, quantity: 1})
+    }
+    
+    // console.log(cartArray)
 
-productsHtml.addEventListener('click', (e) =>{
+    render();
+  }
+});
+
+function render() {
+  cartElement.innerHTML = "";
+  cartArray.forEach((product) => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "cart_product");
+
+    div.innerHTML = ` <img class="product_image" src="${product.image}"  alt="" />
+        <div class="text">
+          <div class="name_delete">
+            <h3>${product.name}</h3>
+            <img src="./images/Frame.png" alt="">
+          </div>
+          <div class="detailed_info">
+            <div class="size_div">
+            <span class="size">Size:</span>
+            <span class="dynamic_size">${product.size}</span>
+            </div>
+            <div class="color_div">
+            <span class="color">Color:</span>
+            <span class="dynamic_color">${product.color}</span>
+            </div>
+          </div>
+          <div class="price_quantity">
+           <span class="product_price">$${product.price}</span>
+           <div class="quantity">
+  <button class="decrease" name='${product.id}'>-</button>
+  <span>${product.quantity}</span>
+  <button class="increase" name='${product.id}'>+</button>
+</div>
+          </div>
+        </div>`;
+
+    cartElement.append(div);
+  });
+}
+
+
+cartElement.addEventListener('click', (e) =>{
+  const clickedElement = e.target
+  const ID = Number(clickedElement.getAttribute('name'))
+  
+  const chosenItem = cartArray.find((p) => p.id === ID)
+// console.log(chosenItem)
+
+  if(chosenItem){
    
-   if(e.target.getAttribute('class') === 'add_btn'){
-    const ID = e.target.getAttribute('name') 
-    console.log(ID)
-   }
+    if(clickedElement.classList.contains('increase')){
+     chosenItem.quantity+=1
+     render()
+    }
+    if(clickedElement.classList.contains('decrease')){
+      chosenItem.quantity -= 1
+      render()
+    }
+  }
 })
+
+
+
+
+
+// const fruits = ['apple', 'banana', 'orange']
+
+// const fruitsArray = [...fruits, 'pineapple']
+// console.log(fruitsArray)
+
+// const obj = {
+//   name: 'car',
+//   year: 1990,
+// } 
+// const newObj = {...obj, model: 'sedan'}
+// console.log(newObj)
