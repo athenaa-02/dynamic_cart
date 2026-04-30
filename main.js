@@ -101,15 +101,14 @@ productsHtml.addEventListener("click", (event) => {
     const ID = Number(event.target.getAttribute("name"));
 
     const chosen = clothes.find((item) => ID === item.id);
-    const existingElement = cartArray.find((product) => product.id === ID)
+    const existingElement = cartArray.find((product) => product.id === ID);
 
-
-    if(existingElement){
-      existingElement.quantity += 1
-    }else{
-      cartArray.push({...chosen, quantity: 1})
+    if (existingElement) {
+      existingElement.quantity += 1;
+    } else {
+      cartArray.push({ ...chosen, quantity: 1 });
     }
-    
+
     // console.log(cartArray)
 
     render();
@@ -124,9 +123,9 @@ function render() {
 
     div.innerHTML = ` <img class="product_image" src="${product.image}"  alt="" />
         <div class="text">
-          <div class="name_delete">
+          <div class="name_delete" >
             <h3>${product.name}</h3>
-            <img src="./images/Frame.png" alt="">
+            <img class="delete_button" name='${product.id}'  src="./images/Frame.png" alt="">
           </div>
           <div class="detailed_info">
             <div class="size_div">
@@ -152,30 +151,31 @@ function render() {
   });
 }
 
+cartElement.addEventListener("click", (e) => {
+  const clickedElement = e.target;
+  const ID = Number(clickedElement.getAttribute("name"));
 
-cartElement.addEventListener('click', (e) =>{
-  const clickedElement = e.target
-  const ID = Number(clickedElement.getAttribute('name'))
-  
-  const chosenItem = cartArray.find((p) => p.id === ID)
-// console.log(chosenItem)
+  const chosenItem = cartArray.find((p) => p.id === ID);
+  // console.log(chosenItem)
 
-  if(chosenItem){
-   
-    if(clickedElement.classList.contains('increase')){
-     chosenItem.quantity+=1
-     render()
+  if (chosenItem) {
+    if (clickedElement.classList.contains("increase")) {
+      chosenItem.quantity += 1;
+      render();
     }
-    if(clickedElement.classList.contains('decrease')){
-      chosenItem.quantity -= 1
+    if (clickedElement.classList.contains("decrease")) {
+      chosenItem.quantity -= 1;
+      if (chosenItem.quantity === 0) {
+        cartArray = cartArray.filter((item) => item.id !== ID);
+      }
       render()
     }
   }
-})
-
-
-
-
+  if (clickedElement.classList.contains("delete_button")) {
+    cartArray = cartArray.filter((item) => item.id !== ID);
+    render();
+  }
+});
 
 // const fruits = ['apple', 'banana', 'orange']
 
@@ -185,6 +185,12 @@ cartElement.addEventListener('click', (e) =>{
 // const obj = {
 //   name: 'car',
 //   year: 1990,
-// } 
+// }
 // const newObj = {...obj, model: 'sedan'}
 // console.log(newObj)
+
+// let Arr = [12, 44, 67, 658765, 34, 123]
+
+// const newArr = Arr.filter((item) => item < 50)
+// console.log(newArr)
+// console.log(Arr)
